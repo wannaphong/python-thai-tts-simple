@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
 import pyaudio
 import wave
-import os.path
 import codecs
-import csv
 from glob import glob
 from pythainlp.tokenize import dict_word_tokenize,create_custom_dict_trie
 from marisa_trie import Trie
 from pydub import AudioSegment
 class tts:
     def __init__(self,file="temp.wav"):
-        self.chunk = 512 #1024
+        self.chunk = 1024
         self.data_file={}
-        with codecs.open('data.txt','r',encoding='utf-8-sig') as f:
-            t= f.read()
-        for line in t.split("\n"):
-            self.data_file[line.split(',')[0]]=line.split(',')[1].replace('\r\n', '').replace('\r', '')
+        with codecs.open('data.txt','r',encoding='utf-8-sig') as self.f:
+            self.t= self.f.read()
+        for self.line in self.t.split("\n"):
+            self.data_file[self.line.split(',')[0]]=self.line.split(',')[1].replace('\r\n', '').replace('\r', '')
         self.word_list=self.data_file.keys()
         self.file=file
     def run(self,text):
